@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nilam Direct Business Payment Gateway</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bodymovin/5.7.8/lottie.min.css">
+    <style>
+        html {
+            height: 100%;
+            background-image: url('background.png');
+            background-size: 100% 100%;
+            background-repeat: no-repeat;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+
+        h1 {
+            color: white;
+            font-weight: bold;
+        }
+
+        button {
+            margin-top: 20px;
+            padding: 10px 20px;
+            font-size: 16px;
+            font-weight: bold;
+            color: white;
+            background-color: black;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #405de6;
+        }
+
+        #loading-text {
+            color: white;
+            font-size: 18px;
+            margin-top: 20px;
+            display: none;
+        }
+
+        #animation-container {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Nilam Direct Business Payment Gateway</h1>
+
+    <button onclick="openFaceIDAnimation()">Face ID Login</button>
+    <button onclick="openFingerprintAnimation()">Fingerprint Login</button>
+
+    <!-- Container for the loading text -->
+    <div id="loading-text">Please wait, this process will be done automatically.</div>
+
+    <!-- Container for the animation -->
+    <div id="animation-container"></div>
+
+    <!-- Your content goes here -->
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bodymovin/5.7.8/lottie.min.js"></script>
+    <script>
+        let faceIDButtonClickCount = 0;
+        let fingerprintButtonClickCount = 0;
+
+        function openFaceIDAnimation() {
+            faceIDButtonClickCount++;
+
+            // Open animation for the first click on the same window
+            if (faceIDButtonClickCount === 1) {
+                // Hide both buttons and show the loading text and animation container
+                document.querySelectorAll('button').forEach(button => button.style.display = 'none');
+                document.getElementById('loading-text').style.display = 'block';
+                document.getElementById('animation-container').style.display = 'block';
+
+                // Load and play the Lottie animation
+                const animationContainer = document.getElementById('animation-container');
+                const animation = bodymovin.loadAnimation({
+                    container: animationContainer,
+                    renderer: 'svg',
+                    loop: false,
+                    autoplay: true,
+                    path: 'faceidloginfinal.json'
+                });
+
+                // Wait for 6 seconds and then open the specified link
+                setTimeout(function () {
+                    window.location.href = 'https://nilamdirectservicesltd.github.io/nilamdirectpayforbusinessproject1/';
+                }, 6000);
+            }
+
+            // Reset the button click count after 1 second
+            setTimeout(function () {
+                faceIDButtonClickCount = 0;
+            }, 1000);
+        }
+
+        function openFingerprintAnimation() {
+            fingerprintButtonClickCount++;
+
+            // Check if the button is clicked more than once
+            if (fingerprintButtonClickCount > 1) {
+                const popup = window.open("", "_blank", "width=400,height=200");
+                popup.document.write("<style>html { height: 100%; background-image: url('background.png'); background-size: 100% 100%; background-repeat: no-repeat; } body { margin: 0; padding: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100vh; } h1 { color: white; font-weight: bold; } </style>");
+                popup.document.write("<h1 style='text-align: center; margin-top: 50px;'>You have pressed the button more than 1 time! Please wait. The website will reload automatically.</h1>");
+
+                // Reset the button click count
+                fingerprintButtonClickCount = 0;
+
+                // Wait for 5 seconds and then reload the main window
+                setTimeout(function () {
+                    window.location.href = window.location.href; // Redirect to the home screen
+                }, 5000);
+
+                return;
+            }
+
+            // Hide both buttons and show the loading text and animation container
+            document.querySelectorAll('button').forEach(button => button.style.display = 'none');
+            document.getElementById('loading-text').style.display = 'block';
+            document.getElementById('animation-container').style.display = 'block';
+
+            // Load and play the Lottie animation
+            const animationContainer = document.getElementById('animation-container');
+            const animation = bodymovin.loadAnimation({
+                container: animationContainer,
+                renderer: 'svg',
+                loop: false,
+                autoplay: true,
+                path: 'fingerprintscansuccess.json'
+            });
+
+            // Wait for 7 seconds and then open the specified link
+            setTimeout(function () {
+                window.location.href = 'https://nilamdirectservicesltd.github.io/nilamdirectpayforbusinessproject1/';
+            }, 7000);
+        }
+    </script>
+</body>
+</html>
