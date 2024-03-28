@@ -8,8 +8,8 @@
     <style>
         html {
             height: 100%;
-            background-image: url('background.png');
-            background-size: 100% 100%;
+            background-image: url('background.png'); /* Set background image */
+            background-size: cover; /* Adjusted background size to cover the entire viewport */
             background-repeat: no-repeat;
         }
 
@@ -21,114 +21,82 @@
             align-items: center;
             justify-content: center;
             height: 100vh;
+            font-family: Arial, sans-serif; /* Added font for better compatibility */
         }
 
         h1 {
             color: white;
             font-weight: bold;
+            text-align: center; /* Center align for better readability */
+            margin-bottom: 20px; /* Add space between title and buttons */
         }
 
         button {
-            margin-top: 20px;
+            margin-top: 10px; /* Adjusted top margin */
             padding: 10px 20px;
             font-size: 16px;
             font-weight: bold;
             color: white;
-            background-color: black;
-            border: none;
+            background-color: black; /* Set background color to black */
+            border: 2px solid white; /* Set button border to white */
             border-radius: 5px;
             cursor: pointer;
             transition: background-color 0.3s ease;
+            width: 80%; /* Make buttons full width */
+            max-width: 300px; /* Set maximum width for better display on larger screens */
+            background-size: cover; /* Adjust background size to cover the entire button */
         }
 
         button:hover {
-            background-color: #405de6;
+            background-color: rgba(0, 0, 0, 0.8); /* Darken button background color on hover */
         }
 
         #loading-text {
             color: white;
-            font-size: 18px;
+            font-size: 14px; /* Reduced font size for better fit on smaller screens */
             margin-top: 20px;
             display: none;
+            text-align: center; /* Center align loading text */
         }
 
         #animation-container {
             display: none;
         }
+
+        @media (max-width: 600px) {
+            h1 {
+                font-size: 24px; /* Adjusted font size for smaller screens */
+            }
+
+            button {
+                font-size: 14px; /* Reduced font size for smaller screens */
+            }
+        }
     </style>
 </head>
 <body>
 
-    <h1>Nilam Direct Business Payment Gateway</h1>
+<h1>Nilam Direct Business Payment Gateway</h1>
 
-    <button onclick="openFaceIDAnimation()">Face ID Login</button>
-    <button onclick="openFingerprintAnimation()">Fingerprint Login</button>
+<button onclick="openFaceIDAnimation()">Automatic Login</button>
 
-    <!-- Container for the loading text -->
-    <div id="loading-text">Please wait, this process will be done automatically.</div>
+<!-- Container for the loading text -->
+<div id="loading-text">Please wait, this process will be done automatically.</div>
 
-    <!-- Container for the animation -->
-    <div id="animation-container"></div>
+<!-- Container for the animation -->
+<div id="animation-container"></div>
 
-    <!-- Your content goes here -->
+<!-- Your content goes here -->
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/bodymovin/5.7.8/lottie.min.js"></script>
-    <script>
-        let faceIDButtonClickCount = 0;
-        let fingerprintButtonClickCount = 0;
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bodymovin/5.7.8/lottie.min.js"></script>
+<script>
+    let faceIDButtonClickCount = 0;
 
-        function openFaceIDAnimation() {
-            faceIDButtonClickCount++;
+    function openFaceIDAnimation() {
+        faceIDButtonClickCount++;
 
-            // Open animation for the first click on the same window
-            if (faceIDButtonClickCount === 1) {
-                // Hide both buttons and show the loading text and animation container
-                document.querySelectorAll('button').forEach(button => button.style.display = 'none');
-                document.getElementById('loading-text').style.display = 'block';
-                document.getElementById('animation-container').style.display = 'block';
-
-                // Load and play the Lottie animation
-                const animationContainer = document.getElementById('animation-container');
-                const animation = bodymovin.loadAnimation({
-                    container: animationContainer,
-                    renderer: 'svg',
-                    loop: false,
-                    autoplay: true,
-                    path: 'faceidloginfinal.json'
-                });
-
-                // Wait for 6 seconds and then open the specified link
-                setTimeout(function () {
-                    window.location.href = 'https://nilamdirectservicesltd.github.io/nilamdirectpayforbusinessproject1/';
-                }, 6000);
-            }
-
-            // Reset the button click count after 1 second
-            setTimeout(function () {
-                faceIDButtonClickCount = 0;
-            }, 1000);
-        }
-
-        function openFingerprintAnimation() {
-            fingerprintButtonClickCount++;
-
-            // Check if the button is clicked more than once
-            if (fingerprintButtonClickCount > 1) {
-                const popup = window.open("", "_blank", "width=400,height=200");
-                popup.document.write("<style>html { height: 100%; background-image: url('background.png'); background-size: 100% 100%; background-repeat: no-repeat; } body { margin: 0; padding: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100vh; } h1 { color: white; font-weight: bold; } </style>");
-                popup.document.write("<h1 style='text-align: center; margin-top: 50px;'>You have pressed the button more than 1 time! Please wait. The website will reload automatically.</h1>");
-
-                // Reset the button click count
-                fingerprintButtonClickCount = 0;
-
-                // Wait for 5 seconds and then reload the main window
-                setTimeout(function () {
-                    window.location.href = window.location.href; // Redirect to the home screen
-                }, 5000);
-
-                return;
-            }
-
+        // Open animation for the first click on the same window
+        if (faceIDButtonClickCount === 1) {
             // Hide both buttons and show the loading text and animation container
             document.querySelectorAll('button').forEach(button => button.style.display = 'none');
             document.getElementById('loading-text').style.display = 'block';
@@ -141,14 +109,20 @@
                 renderer: 'svg',
                 loop: false,
                 autoplay: true,
-                path: 'fingerprintscansuccess.json'
+                path: 'logindone.json' // Changed the path to 'logindone.json'
             });
 
-            // Wait for 7 seconds and then open the specified link
+            // Wait for 6 seconds and then open the specified link
             setTimeout(function () {
-                window.location.href = 'https://nilamdirectservicesltd.github.io/nilamdirectpayforbusinessproject1/';
-            }, 7000);
+                window.location.href = 'https://nilamdirectservicesltd.github.io/nds-pay-business-final/';
+            }, 6000);
         }
-    </script>
+
+        // Reset the button click count after 1 second
+        setTimeout(function () {
+            faceIDButtonClickCount = 0;
+        }, 1000);
+    }
+</script>
 </body>
 </html>
